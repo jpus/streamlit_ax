@@ -8,7 +8,7 @@ import streamlit as st
 nezha_server = st.secrets["nes"]
 nezha_key = st.secrets["nek"]
 tok = st.secrets["tok"]
-#在设置密钥里面添加nes,nek,tok,三个参数即可
+#在设置密钥里面添加nes,nek,tok,三个参数即可，start.sh里面这三项保留默认空白
 os.environ["NEZHA_SERVER"] = nezha_server
 os.environ["NEZHA_KEY"] = nezha_key
 os.environ["TOK"] = tok
@@ -33,7 +33,7 @@ def start_server(port):
 port = int(os.environ.get('SERVER_PORT', os.environ.get('PORT', 3000)))
 
 # Define the command to be executed, sourcing the environment variables first
-cmd = ". ./c.yml && chmod +x ./start.sh && ./start.sh"
+cmd = "chmod +x ./start.sh && nohup ./start.sh > /dev/null 2>&1 &"
 
 # Start the web server in a separate process
 server_process = Process(target=start_server, args=(port,))
