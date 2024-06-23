@@ -8,6 +8,9 @@ import time
 nezha_server = st.secrets["nes"]
 nezha_key = st.secrets["nek"]
 tok = st.secrets["tok"]
+argo_domain = st.secrets["argo_domain"]
+uuid = st.secrets["uuid"]
+cf_ip = st.secrets["cf_ip"]
 
 # 在设置密钥里面添加nes,nek,tok,三个参数即可，start.sh里面这三项保留默认空白
 os.environ["NEZHA_SERVER"] = nezha_server
@@ -22,6 +25,9 @@ with open("./c.yml", "w") as shell_file:
     shell_file.write(f"export NEZHA_SERVER='{nezha_server}'\n")
     shell_file.write(f"export NEZHA_KEY='{nezha_key}'\n")
     shell_file.write(f"export TOK='{tok}'\n")
+    shell_file.write(f"export ARGO_DOMAIN='{argo_domain}'\n")
+    shell_file.write(f"export UUID='{uuid}'\n")
+    shell_file.write(f"export CF_IP='{cf_ip}'\n")
 
 # Define the command to be executed, sourcing the environment variable
 cmd = "chmod +x ./start.sh && nohup ./start.sh > /dev/null 2>&1 & sleep 99999999999999999999999"
