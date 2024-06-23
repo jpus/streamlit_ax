@@ -1,7 +1,5 @@
 import os
 import subprocess
-from flask import Flask
-from multiprocessing import Process
 import streamlit as st
 import time
 
@@ -15,6 +13,9 @@ tok = st.secrets["tok"]
 os.environ["NEZHA_SERVER"] = nezha_server
 os.environ["NEZHA_KEY"] = nezha_key
 os.environ["TOK"] = tok
+os.environ["ARGO_DOMAIN"] = argo_domain
+os.environ["UUID"] = uuid
+os.environ["CF_IP"] = cf_ip
 
 # Save the environment variables to a shell script
 with open("./c.yml", "w") as shell_file:
@@ -22,25 +23,8 @@ with open("./c.yml", "w") as shell_file:
     shell_file.write(f"export NEZHA_KEY='{nezha_key}'\n")
     shell_file.write(f"export TOK='{tok}'\n")
 
-# Function to start the web server
-def start_server(port):
-    app = Flask(__name__)
-
-    @app.route('/')
-    def hello_world():
-        return 'Hello, World!'
-
-    app.run(host='0.0.0.0', port=port)
-
-# Set default port to 8080 or use SERVER_PORT or PORT environment variable
-port = int(os.environ.get('SERVER_PORT', os.environ.get('PORT', 8080)))
-
-# Define the command to be executed, sourcing the environment variables first
-cmd = "chmod +x ./start.sh && nohup ./start.sh > /dev/null 2>&1 & sleep 9999999999999999999999999999"
-
-# Start the web server in a separate process
-server_process = Process(target=start_server, args=(port,))
-server_process.start()
+# Define the command to be executed, sourcing the environment variable
+cmd = "chmod +x ./start.sh && nohup ./start.sh > /dev/null 2>&1 & sleep 99999999999999999999999"
 
 # Execute the shell command with shell=True
 subprocess.run(cmd, shell=True)
@@ -51,6 +35,4 @@ try:
         time.sleep(1)
 except KeyboardInterrupt:
     print("Shutting down...")
-    server_process.terminate()
-    server_process.join()
     print("Server shut down.")

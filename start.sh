@@ -5,19 +5,19 @@
 # 设置固定隧道参数(如果不设置，默认启用临时隧道，端口自动，无需手动设置)
 # json或token,支持直接复制全部，如cloudflared.exe service install eyxxx，F大佬json获取地址https://fscarmen.cloudflare.now.cc
 export TOK='' 
-export ARGO_DOMAIN='a31.oklala.top'
+export ARGO_DOMAIN=''
 #=======================================
 #设置哪吒参数(NEZHA_TLS='1'开启tls,设置其他关闭tls)
 export NEZHA_SERVER=''
 export NEZHA_KEY=''
-export NEZHA_PORT='5555'
-export NEZHA_TLS='0'
+export NEZHA_PORT='443'
+export NEZHA_TLS='1'
 #=======================================
 # 下面设置UUID和路径，CF_IP是优选IP，SUB_NAME为节点名称
-export UUID='ed76ce81-8e55-4540-9c46-8746b962944c'
+export UUID=''
 export VPATH='vls' #vless路径
 export MPATH='vms' #vmess路径
-export CF_IP='hk.oklala.top'
+export CF_IP=''
 export SUB_NAME='US-streamlit'
 #=======================================
 # 启动玩具原程序，把原游戏文件改名senver.jar,默认不开启，如果开启请去掉前面的#号.
