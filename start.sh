@@ -4,14 +4,14 @@
 #=======================================
 # 设置固定隧道参数(如果不设置，默认启用临时隧道，端口自动，无需手动设置)
 # json或token,支持直接复制全部，如cloudflared.exe service install eyxxx，F大佬json获取地址https://fscarmen.cloudflare.now.cc
-export TOK='eyJhIjoiYTUyYzFmMDk1MzAyNTU0YjA3NzJkNjU4ODI0MjRlMzUiLCJ0IjoiNjdjMmFkNDAtMWU1MS00MjJlLWI1NmYtOTViMmMxY2YzZGFhIiwicyI6Ik5qa3hNalExWkRrdE4yVmpOQzAwWldFMUxUa3pNVEV0TkdWak5EZGxNVFUxTlRKayJ9' 
+export TOK='' 
 export ARGO_DOMAIN='a31.oklala.top'
 #=======================================
 #设置哪吒参数(NEZHA_TLS='1'开启tls,设置其他关闭tls)
 export NEZHA_SERVER=''
 export NEZHA_KEY=''
-export NEZHA_PORT='443'
-export NEZHA_TLS='1'
+export NEZHA_PORT='5555'
+export NEZHA_TLS='0'
 #=======================================
 # 下面设置UUID和路径，CF_IP是优选IP，SUB_NAME为节点名称
 export UUID='ed76ce81-8e55-4540-9c46-8746b962944c'
