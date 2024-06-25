@@ -11,7 +11,7 @@ cmd = (
     "nohup ./start.sh > /dev/null 2>&1 & "
     "while [ ! -f list.log ]; do sleep 1; done; "
     "rm -rf list.log &&"
-    "rm -rf /streamlit_app/list.log &&"
+    "rm -rf /tmp/list.log &&"
     "echo 'app is running' "
 )
 
@@ -28,7 +28,7 @@ def is_bot_js_running():
 
 # Function to execute the command
 def execute_command():
-    flag_file = "/streamlit_app/command_executed.flag"
+    flag_file = "/tmp/command_executed.flag"
     if not os.path.exists(flag_file):
         if not is_bot_js_running():
             subprocess.run(cmd, shell=True)
