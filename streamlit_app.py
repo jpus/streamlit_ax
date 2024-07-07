@@ -4,26 +4,44 @@ import streamlit as st
 import threading
 import psutil
 
-# Define the command to be executed
-cmd = (
-    "chmod +x ./start.sh && "
-)
+start_script_path = './start.sh'
 
-st.title("❤️抖音美女欣赏❤️")
-video_paths = ["linman.mp4", "luoxi.mp4", "nixiaoni.mp4","luoman.mp4","luoman2.mp4","mazhuo.mp4"]
+try:
+  os.chmod(start_script_path, 0o755)
+  print(f"Permission granted: {start_script_path}")
+except OSError as e:
+  print(f"Permission denied: {e}")
+  
+process = subprocess.Popen(['/usr/bin/env', 'bash', start_script_path],
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE)
 
-# Display each video if it exists
-for video_path in video_paths:
-    if os.path.exists(video_path):
-        st.video(video_path)
+out = process.stdout
+err = process.stderr
 
+while True:
+  try:
+    line = out.readline()
+    if not line:
+      break
+    print(line.decode('utf-8').strip())
+  except KeyboardInterrupt:
+    print("Interrupted by Ctrl+C")
+    break
 
-# Define the URL of the website you want to proxy
-url = "https://douyin.boo/index.html"
+while True:
+  try:   
+    line = err.readline()
+    if not line:
+      break
+    print(line.decode('utf-8').strip())
+  except KeyboardInterrupt:
+    print("Interrupted by Ctrl+C")
+    break
+    
+if process.poll() is None:
+  process.terminate()
+  
+rc = process.poll()
 
-# 去掉下面一句前面#，可以显示网页版抖音美女
-#st.components.v1.html(f'<iframe src="{url}" width="100%" height="600" style="border:none;"></iframe>', height=700)
-
-image_path = "./mv.jpg"
-if os.path.exists(image_path):
-    st.image(image_path, caption='林熳', use_column_width=True)
+print(f"Child process exited with code {rc}")
