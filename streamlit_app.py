@@ -4,7 +4,7 @@ import streamlit as st
 import threading
 import psutil
 
-st.write("Hello world")
+st.title("Hello World")
 
 start_script_path = './start.sh'
 
