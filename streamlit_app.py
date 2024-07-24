@@ -302,9 +302,4 @@ def start_server():
 start_server()
 
 if __name__ == '__main__':
-    with socketserver.TCPServer(("", PORT), Handler, False) as httpd:
-        print("Server started at port", PORT)
-        httpd.allow_reuse_address = True
-        httpd.server_bind()
-        httpd.server_activate()
-        httpd.serve_forever()
+        print("app is running")
