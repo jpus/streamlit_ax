@@ -45,7 +45,7 @@ for file in paths_to_delete:
         print(f"Skip Delete {file_path}")
 
 # http server
-st.write("Hello World")
+# st.write("Hello World")
 st.page("pages/index.html")
 
 # Generate xr-ay config file
