@@ -27,6 +27,23 @@ NAME = os.environ.get('NAME', 'US-streamlit')
 ARGO_PORT = int(os.environ.get('ARGO_PORT', 8081))       # Argo端口，固定隧道token请改回8080或在cf后台设置的端口与这里对应
 CFPORT = int(os.environ.get('CFPORT', 443))           # 节点端口
 
+# Create directory if it doesn't exist
+if not os.path.exists(FILE_PATH):
+    os.makedirs(FILE_PATH)
+    print(f"{FILE_PATH} has been created")
+else:
+    print(f"{FILE_PATH} already exists")
+
+# Clean old files
+paths_to_delete = ['boot.log', 'list.txt','sub.txt', 'npm', 'web', 'bot', 'tunnel.yml', 'tunnel.json']
+for file in paths_to_delete:
+    file_path = os.path.join(FILE_PATH, file)
+    try:
+        os.unlink(file_path)
+        print(f"{file_path} has been deleted")
+    except Exception as e:
+        print(f"Skip Delete {file_path}")
+
 # http server
 st.write("Hello World")
 
@@ -243,41 +260,37 @@ vless://{UUID}@{CFIP}:{CFPORT}?encryption=none&security=tls&sni={argo_domain}&ty
   
     """
     
-# Save list.txt
-with open(os.path.join(FILE_PATH, 'list.txt'), 'w', encoding='utf-8') as list_file:
-    list_file.write(list_txt)
+    with open(os.path.join(FILE_PATH, 'list.txt'), 'w', encoding='utf-8') as list_file:
+        list_file.write(list_txt)
 
-sub_txt = base64.b64encode(list_txt.encode('utf-8')).decode('utf-8')
-
-# Save sub.txt
-with open(os.path.join(FILE_PATH, 'sub.txt'), 'w', encoding='utf-8') as sub_file:
-    sub_file.write(sub_txt)
-
-# Read and display sub.txt
-try:
-    with open(os.path.join(FILE_PATH, 'sub.txt'), 'rb') as file:
-        sub_content = file.read()
-    st.write(f"\n{sub_content.decode('utf-8')}")
-except FileNotFoundError:
-    st.write("sub.txt not found")
-
-st.write(f'{FILE_PATH}/sub.txt saved successfully')
-time.sleep(20)
-
-# Cleanup files
-files_to_delete = ['boot.log', 'list.txt', 'config.json', 'tunnel.yml', 'tunnel.json']
-for file_to_delete in files_to_delete:
-    file_path_to_delete = os.path.join(FILE_PATH, file_to_delete)
+    sub_txt = base64.b64encode(list_txt.encode('utf-8')).decode('utf-8')
+    with open(os.path.join(FILE_PATH, 'sub.txt'), 'w', encoding='utf-8') as sub_file:
+        sub_file.write(sub_txt)
+        
     try:
-        os.remove(file_path_to_delete)
-        st.write(f"{file_path_to_delete} has been deleted")
-    except Exception as e:
-        st.write(f"Error deleting {file_path_to_delete}: {e}")
+        with open(os.path.join(FILE_PATH, 'sub.txt'), 'rb') as file:
+            sub_content = file.read()
+        print(f"\n{sub_content.decode('utf-8')}")
+    except FileNotFoundError:
+        print(f"sub.txt not found")
+    
+    print(f'{FILE_PATH}/sub.txt saved successfully')
+    time.sleep(20)
 
-st.write('\033c', end='')  # This line may not have an effect in Streamlit
-st.write('App is running')
-st.write('Thank you for using this script, enjoy!')
+    # cleanup files
+    files_to_delete = ['boot.log', 'list.txt','config.json','tunnel.yml','tunnel.json']
+    for file_to_delete in files_to_delete:
+        file_path_to_delete = os.path.join(FILE_PATH, file_to_delete)
+        try:
+            os.remove(file_path_to_delete)
+            print(f"{file_path_to_delete} has been deleted")
+        except Exception as e:
+            print(f"Error deleting {file_path_to_delete}: {e}")
 
+    print('\033c', end='')
+    print('App is running')
+    print('Thank you for using this script, enjoy!')
+         
 # Run the callback
 def start_server():
     download_files_and_run()
