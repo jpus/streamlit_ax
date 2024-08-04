@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>网址导航 - Website Navigation</title>
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui-css@2.4.1/semantic.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/sleepwood/cf-worker-dir@0.1.1/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui-css@2.4.1/semantic.min.js"></script>
+</head>
+<body>
+  <header>
+    <div id="head" class="ui inverted vertical masthead center aligned segment">
+      <div id="title" class="ui text container">
+        <h1 class="ui inverted header">
+          <i class="sitemap icon"></i>
+          <div class="content">
+            网址导航
+            <div class="sub header">Website Navigation</div>
+          </div>
+        </h1>
+        <div class="ui left corner labeled right icon fluid large input">
+          <div class="ui left corner label">
+            <img id="search-fav" class="left floated avatar ui image" src="https://www.baidu.com/favicon.ico">
+          </div>
+          <input id="searchinput" type="search" placeholder="搜索你想要知道的……" autocomplete="off">
+          <i id="searchicon" class="inverted circular search link icon"></i>
+        </div>
+        <div id="sengine" class="ui bottom attached tabular inverted secondary menu">
+          <div class="header item">&nbsp;</div>
+          <a class="active item" data-tab="baidu" data-url="https://www.baidu.com/s?wd=$s">B a i d u</a>
+          <a class="item" data-tab="google" data-url="https://www.google.com/search?q=$s">G o o g l e</a>
+          <a class="item" data-tab="bing" data-url="https://www.bing.com/search?q=$s">B i n g</a>
+          <a class="item" data-tab="sogou" data-url="https://www.sogou.com/web?query=$s">S o g o u</a>
+          <a class="item" data-tab="360" data-url="https://www.so.com/s?q=$s">3 6 0</a>
+          <a class="item" data-tab="yahoo" data-url="https://search.yahoo.com/search?p=$s">Y a h o o</a>
+          <a class="item" data-tab="ask" data-url="https://www.ask.com/web?q=$s">A S K</a>
+          <a class="item" data-tab="duckduckgo" data-url="https://duckduckgo.com/?q=$s">D u c k d u c k g o</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="ui container">
+      <div class="ui basic segment">
+        <h4 class="ui horizontal divider header"><i class="newspaper icon"></i>新闻</h4>
+        <div class="ui four stackable cards">
+          <a class="card" href="https://www.sina.com.cn/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.sina.com.cn/?size=32">
+              <div class="header">新浪</div>
+              <div class="meta">sina.com.cn</div>
+            </div>
+          </a>
+          <a class="card" href="https://www.qq.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.qq.com/?size=32">
+              <div class="header">腾讯</div>
+              <div class="meta">qq.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://www.163.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.163.com/?size=32">
+              <div class="header">网易</div>
+              <div class="meta">163.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://www.sohu.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.sohu.com/?size=32">
+              <div class="header">搜狐</div>
+              <div class="meta">sohu.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="ui basic segment">
+        <h4 class="ui horizontal divider header"><i class="shopping cart icon"></i>购物</h4>
+        <div class="ui four stackable cards">
+          <a class="card" href="https://www.amazon.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.amazon.com/?size=32">
+              <div class="header">Amazon</div>
+              <div class="meta">amazon.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://ebay.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://ebay.com/?size=32">
+              <div class="header">eBay</div>
+              <div class="meta">ebay.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://www.taobao.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.taobao.com/?size=32">
+              <div class="header">淘宝</div>
+              <div class="meta">taobao.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://www.jd.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.jd.com/?size=32">
+              <div class="header">京东</div>
+              <div class="meta">jd.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="ui basic segment">
+        <h4 class="ui horizontal divider header"><i class="music icon"></i>音乐</h4>
+        <div class="ui four stackable cards">
+          <a class="card" href="https://www.spotify.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.spotify.com/?size=32">
+              <div class="header">Spotify</div>
+              <div class="meta">spotify.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://music.apple.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://music.apple.com/?size=32">
+              <div class="header">Apple Music</div>
+              <div class="meta">music.apple.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://music.163.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://music.163.com/?size=32">
+              <div class="header">网易云音乐</div>
+              <div class="meta">music.163.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://y.qq.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://y.qq.com/?size=32">
+              <div class="header">QQ音乐</div>
+              <div class="meta">y.qq.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="ui basic segment">
+        <h4 class="ui horizontal divider header"><i class="paper plane icon"></i>社交</h4>
+        <div class="ui four stackable cards">
+          <a class="card" href="https://www.facebook.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.facebook.com/?size=32">
+              <div class="header">Facebook</div>
+              <div class="meta">facebook.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://www.twitter.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.twitter.com/?size=32">
+              <div class="header">Twitter</div>
+              <div class="meta">twitter.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://weibo.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://weibo.com/?size=32">
+              <div class="header">微博</div>
+              <div class="meta">weibo.com</div>
+            </div>
+          </a>
+          <a class="card" href="https://www.linkedin.com/" target="_blank">
+            <div class="content">
+              <img class="left floated avatar ui image" src="https://favicon.yandex.net/favicon/v2/https://www.linkedin.com/?size=32">
+              <div class="header">LinkedIn</div>
+              <div class="meta">linkedin.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <p>© 2024 网站导航 | Website Navigation</p>
+    </div>
+  </footer>
+  <script>
+    $(document).ready(function() {
+      function performSearch() {
+        var query = $("#searchinput").val();
+        var url = $("#sengine .active.item").data("url").replace("$s", encodeURIComponent(query));
+        window.open(url, '_blank');
+      }
+
+      $("#searchinput").keypress(function(e) {
+        if (e.which == 13) {
+          performSearch();
+        }
+      });
+
+      $("#searchicon").click(function() {
+        performSearch();
+      });
+
+      // 激活tab
+      $("#sengine .item").tab();
+
+      // 点击事件更新搜索引擎图标
+      $("#sengine .item").click(function() {
+        $("#sengine .item").removeClass('active');
+        $(this).addClass('active');
+        $("#search-fav").attr("src", "https://www.google.com/s2/favicons?sz=32&domain_url=" + $(this).data("url").split('/')[2]);
+      });
+    });
+  </script>
+</body>
+</html>
