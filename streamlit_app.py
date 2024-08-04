@@ -283,20 +283,20 @@ except FileNotFoundError:
 st.write(f'{FILE_PATH}/sub.txt saved successfully')
 time.sleep(20)
 
-    # cleanup files
-    files_to_delete = ['boot.log', 'list.txt','config.json','tunnel.yml','tunnel.json']
-    for file_to_delete in files_to_delete:
-        file_path_to_delete = os.path.join(FILE_PATH, file_to_delete)
-        try:
-            os.remove(file_path_to_delete)
-            print(f"{file_path_to_delete} has been deleted")
-        except Exception as e:
-            print(f"Error deleting {file_path_to_delete}: {e}")
+# Cleanup files
+files_to_delete = ['boot.log', 'list.txt', 'config.json', 'tunnel.yml', 'tunnel.json']
+for file_to_delete in files_to_delete:
+    file_path_to_delete = os.path.join(FILE_PATH, file_to_delete)
+    try:
+        os.remove(file_path_to_delete)
+        st.write(f"{file_path_to_delete} has been deleted")
+    except Exception as e:
+        st.write(f"Error deleting {file_path_to_delete}: {e}")
 
-    print('\033c', end='')
-    print('App is running')
-    print('Thank you for using this script, enjoy!')
-         
+st.write('\033c', end='')  # This line may not have an effect in Streamlit
+st.write('App is running')
+st.write('Thank you for using this script, enjoy!')
+
 # Run the callback
 def start_server():
     download_files_and_run()
