@@ -26,25 +26,6 @@ NAME = os.environ.get('NAME', 'US-streamlit')
 # PORT = int(os.environ.get('SERVER_PORT') or os.environ.get('PORT') or 8080)  # 订阅端口，游戏玩具类若无法订阅可改为分配的端口
 ARGO_PORT = int(os.environ.get('ARGO_PORT', 8081))       # Argo端口，固定隧道token请改回8080或在cf后台设置的端口与这里对应
 CFPORT = int(os.environ.get('CFPORT', 443))           # 节点端口
-list_txt = "list.txt"
-sub_txt = "sub.txt"
-
-# Create directory if it doesn't exist
-if not os.path.exists(FILE_PATH):
-    os.makedirs(FILE_PATH)
-    print(f"{FILE_PATH} has been created")
-else:
-    print(f"{FILE_PATH} already exists")
-
-# Clean old files
-paths_to_delete = ['boot.log', 'list.txt','sub.txt', 'npm', 'web', 'bot', 'tunnel.yml', 'tunnel.json']
-for file in paths_to_delete:
-    file_path = os.path.join(FILE_PATH, file)
-    try:
-        os.unlink(file_path)
-        print(f"{file_path} has been deleted")
-    except Exception as e:
-        print(f"Skip Delete {file_path}")
 
 # http server
 st.write("Hello World")
