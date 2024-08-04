@@ -46,7 +46,7 @@ for file in paths_to_delete:
 
 # http server
 st.write("Hello World")
-st.page_link("pages/index.html")
+st.page("pages/index.html")
 
 # Generate xr-ay config file
 def generate_config():
