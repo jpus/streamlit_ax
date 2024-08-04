@@ -14,7 +14,7 @@ import time
 import base64
 
 # Set environment variables
-FILE_PATH = os.environ.get('FILE_PATH', './tmp')
+FILE_PATH = os.environ.get('FILE_PATH', '.')
 UUID = os.environ.get('UUID', '')
 NEZHA_SERVER = os.environ.get('NEZHA_SERVER', '')        # 哪吒3个变量不全不运行
 NEZHA_PORT = os.environ.get('NEZHA_PORT', '443')                  # 哪吒端口为{443,8443,2096,2087,2083,2053}其中之一时开启tls
