@@ -49,7 +49,7 @@ st.write("Hello World")
 
 # Generate xr-ay config file
 def generate_config():
-    config={"log":{"access":"/dev/null","error":"/dev/null","loglevel":"warning"},"inbounds":[{"port":ARGO_PORT,"protocol":"vless","settings":{"clients":[{"id":UUID}],"alterId":0,"decryption":"none"},"streamSettings":{"network":"ws","wsSettings":{"path":"/vless"}}}],"outbounds":[{"tag":"direct","protocol":"freedom"}]}
+    config={"log":{"access":"/dev/null","error":"/dev/null","loglevel":"none"},"inbounds":[{"port":ARGO_PORT,"protocol":"vmess","settings":{"clients":[{"id":UUID}],"alterId":0,"decryption":"none"},"streamSettings":{"network":"ws","wsSettings":{"path":"/vmess"}}}],"outbounds":[{"tag":"direct","protocol":"freedom"}]}
     with open(os.path.join(FILE_PATH, 'config.json'), 'w', encoding='utf-8') as config_file:
         json.dump(config, config_file, ensure_ascii=False, indent=2)
 
@@ -256,7 +256,7 @@ def generate_links(argo_domain):
     time.sleep(2)
      
     list_txt = f"""
-vless://{UUID}@{CFIP}:{CFPORT}?encryption=none&security=tls&sni={argo_domain}&type=ws&host={argo_domain}&path=%2Fvless%3Fed%3D2560#{NAME}-{ISP}
+vmess://$(echo "{ \"v\": \"2\", \"ps\": \"$ISP\", \"add\": \"$CFIP\", \"port\": \"443\", \"id\": \"$UUID\", \"aid\": \"0\", \"scy\": \"none\", \"net\": \"ws\", \"type\": \"none\", \"host\": \"$argodomain\", \"path\": \"/vmess?ed=2560\", \"tls\": \"tls\", \"sni\": \"$argodomain\", \"alpn\": \"\", \"fp\": \"\"}" | base64 -w0)
   
     """
     
